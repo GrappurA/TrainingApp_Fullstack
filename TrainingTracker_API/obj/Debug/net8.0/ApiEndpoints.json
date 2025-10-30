@@ -1,0 +1,22 @@
+[
+  {
+    "ContainingType": "TrainingTracker.Controllers.TrainingController",
+    "Method": "GetTraining",
+    "RelativePath": "api/Training",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[TrainingTracker.Models.Training, TrainingTracker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]
