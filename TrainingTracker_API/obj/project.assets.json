@@ -3175,11 +3175,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nika\\source\\repos\\TrainingTracker\\TrainingTracker\\TrainingApp.API.csproj",
+      "projectUniqueName": "C:\\Users\\Nika\\source\\repos\\TrainingTracker\\TrainingTracker_API\\TrainingApp.API.csproj",
       "projectName": "TrainingApp.API",
-      "projectPath": "C:\\Users\\Nika\\source\\repos\\TrainingTracker\\TrainingTracker\\TrainingApp.API.csproj",
+      "projectPath": "C:\\Users\\Nika\\source\\repos\\TrainingTracker\\TrainingTracker_API\\TrainingApp.API.csproj",
       "packagesPath": "C:\\Users\\Nika\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nika\\source\\repos\\TrainingTracker\\TrainingTracker\\obj\\",
+      "outputPath": "C:\\Users\\Nika\\source\\repos\\TrainingTracker\\TrainingTracker_API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

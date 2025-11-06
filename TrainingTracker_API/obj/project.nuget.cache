@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7jRJ6SCjHNA=",
+  "dgSpecHash": "uRRlG0HeOlQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nika\\source\\repos\\TrainingTracker\\TrainingTracker\\TrainingApp.API.csproj",
+  "projectFilePath": "C:\\Users\\Nika\\source\\repos\\TrainingTracker\\TrainingTracker_API\\TrainingApp.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nika\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Nika\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

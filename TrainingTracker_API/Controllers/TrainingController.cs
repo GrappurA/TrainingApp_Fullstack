@@ -7,7 +7,7 @@ namespace TrainingTracker.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
-	public class TrainingController : Controller
+	public class TrainingController : ControllerBase
 	{
 		private readonly TrainingDbContext _context;
 
@@ -16,20 +16,26 @@ namespace TrainingTracker.Controllers
 			_context = context;
 		}
 
-		[HttpGet]
+		[HttpGet("gettraining")]
 		public async Task<ActionResult<IEnumerable<Training>>> GetTraining()
 		{
 			var _trainings = await _context.Training.ToListAsync();
 			return Ok(_trainings);
 		}
 
-		[HttpPost]
-		public async Task PostTraining(Training training)
+		[HttpPost("posttraining")]
+		public async Task<IActionResult> PostTraining([FromBody]Training training)
 		{
-			//validate smth
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			await _context.Entry(training).ReloadAsync();
 
 			await _context.AddAsync(training);
 			await _context.SaveChangesAsync();
+			return Ok(training);
 		}
 
 	}
