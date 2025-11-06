@@ -8,16 +8,28 @@ body{
     font-family: Roboto;
 }
 
+/* Disable number input scroll on all browsers */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield; /* For Firefox */
+}
+
 .latest-trainings-item
 {
    border-radius: 20%;
-   border-width: 100%;
-   border-color: red;
+   border-width: 5px;
+   border-color: blue;
    border: solid;
    margin:2%;
    padding: 5%;
+   padding-top: 10%;
    font-size:140%;
-   width: 95%;
+   width: 90%;
    height: fit-content;
    background-color: #FB8B24;
 }
