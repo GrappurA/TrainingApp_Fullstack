@@ -39,7 +39,7 @@ async function loadData() {
     for (test_training of test_trainings) {
         addTrainingToUI(test_trainings);
     }    */
-   
+
     try {
         const response = await fetch("http://localhost:5042/api/training/gettraining");
         if (!response.ok)

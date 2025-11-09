@@ -25,11 +25,35 @@ input[type=number] {
    border-width: 5px;
    border-color: blue;
    border: solid;
-   margin:2%;
+   margin: 2% auto;
    padding: 5%;
    padding-top: 10%;
    font-size:140%;
    width: 90%;
    height: fit-content;
    background-color: #FB8B24;
+}
+
+.latest-trainings-item.is-deleting {
+  /* Animation: Fade out and shrink */
+  opacity: 0;
+  transform: scale(0.8);
+  /* You can also add a slide-up effect */
+  /* transform: translateY(-20px); */
+
+  /* Speed of the animation */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.latest-trainings-item.is-entering {
+  opacity: 0;
+  transform: scale(0.8); /* Starts slightly smaller */
+  /* transform: translateY(20px); /* Or starts slightly lower */
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Match the duration for smooth transition */
+}
+
+/* Final state for a new item - after animation */
+.latest-trainings-item.entered {
+  opacity: 1;
+  transform: scale(1); /* Ends at normal size */
 }
