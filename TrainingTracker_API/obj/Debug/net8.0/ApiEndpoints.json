@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "TrainingTracker.Controllers.TrainingController",
+    "Method": "DeleteTraining",
+    "RelativePath": "api/Training/deletetraining/{trainingId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trainingId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrainingTracker.Controllers.TrainingController",
     "Method": "GetTraining",
     "RelativePath": "api/Training/gettraining",
     "HttpMethod": "GET",
