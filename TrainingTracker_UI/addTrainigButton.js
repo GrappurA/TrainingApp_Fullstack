@@ -38,7 +38,7 @@ function addTrainingToUI(training) {
     div.classList.add("latest-trainings-item");
     div.innerHTML = `<div class="crud-buttons ">
           <button id="edit-button"
-            class="w-10 h-10 rounded-2xl border-3 hover:scale-110 transition-transform duration-200"><img
+            class="edit-button w-10 h-10 rounded-2xl border-3 hover:scale-110 transition-transform duration-200"><img
               src="img/edit.png" alt="edit_button" class="p-1 w-[100px] h-auto edit-button"></button>
           <button id="delete-button"
             class="delete-button w-10 h-10 rounded-2xl border-3 hover:scale-110 transition-transform duration-200"><img
@@ -57,6 +57,10 @@ function addTrainingToUI(training) {
     `;
 
     div.dataset.trainingId = training.trainingId;
+    div.dataset.name = training.name;
+    div.dataset.dateTime = training.dateTime;
+    div.dataset.description = training.description;
+    div.dataset.duration = training.duration;
     div.classList.add('is-entering');
 
     trainingItems.append(div);

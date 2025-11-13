@@ -12,7 +12,7 @@
   <title>Training Tracker</title>
 </head>
 
-<body class="flex justify-center bg-[url(/img/background_home.png)]" onload="loadData()">
+<body class="flex justify-center bg-[url(/img/background_home.png)] select-none" onload="loadData()">
 
   <div id="main-container"
     class="bg-[url(/img/oni.png)] bg-[length:auto] bg-repeat h-fit w-[1000px] max-w-[1300px] rounded-3xl h-auto">
@@ -44,10 +44,10 @@
       class="max-w-[1300px] border-[#ff4d4d] border-4 m-2 mt-1 grid grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-3 rounded-2xl">
 
       <form id="training-form" class="latest-trainings-item max-w-md mx-auto rounded-3xl shadow-xl space-y-3">
-        <p class="w-full text-center inset-auto text-2xl border-3 rounded-xl p-1 border-double">Create Training</p> 
+        <p class="w-full text-center inset-auto text-2xl border-3 rounded-xl p-1 border-double">Create Training</p>
         <input id="name" type="text" placeholder="Training name" class="input input-bordered pt-1" />
         <hr class="border-2">
-        <input id="date" type="date" class="input input-bordered pt-1" />
+        <input id="date" type="date" class="input input-bordered pt-1" placeholder="dd/mm/yyyy"/>
         <hr class="border-2">
         <input id="duration" type="number" placeholder="Duration (min)" class="input input-bordered pt-1" />
         <hr class="border-2">
@@ -58,7 +58,23 @@
           class="btn btn-primary border-3 rounded-3xl hover:scale-105 transition-transform duration-200 ml-[17%] p-2 hover:underline">Add
           Training</button>
       </form>
+    </div>
 
+    <div id="edit-overlay" class="modal-overlay invisible">
+
+      <div id="edit-menu"
+        class="bg-[#FB8B24] rounded-3xl border-3 p-2 mx-auto text-2xl max-w-110 max-h-100 p-2 m-0 w-71">
+        <input id="edit-name" type="text" class="input input-bordered pt-1" placeholder="Name"/>
+        <hr class="border-2">
+        <input id="edit-date" type="date" class="input input-bordered pt-1" />
+        <hr class="border-2">
+        <input id="edit-duration" type="number" placeholder="Duration (min)" class="input input-bordered pt-1 w-fit" />
+        <hr class="border-2">
+        <textarea id="edit-description" placeholder="Description"
+          class="textarea textarea-bordered flex-1 min-w-10 max-w-65 w-90 min-h-8 max-h-60 h-8 pt-1"></textarea>
+        <button type="submit" id="edit-submit-button"
+          class="btn btn-primary border-3 rounded-3xl hover:scale-105 transition-transform duration-200 mt-[5%] p-1 hover:underline block w-66">Save</button>
+      </div>
     </div>
 
 
@@ -67,6 +83,7 @@
   <script src="fetchOnReload.js"></script>
   <script src="addTrainigButton.js"></script>
   <script src="deleteButton.js"></script>
+  <script src="editButton.js" defer></script>
 </body>
 
 </html>
