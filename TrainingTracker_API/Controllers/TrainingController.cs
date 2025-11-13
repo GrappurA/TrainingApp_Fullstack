@@ -50,7 +50,7 @@ namespace TrainingTracker.Controllers
 		[HttpDelete("deletetraining/{trainingId}")]
 		public async Task<IActionResult> DeleteTraining(int trainingId)
 		{
-			var trainingToDelete = await _context.Training.FirstOrDefaultAsync(tr=>tr.TrainingId == trainingId);
+			var trainingToDelete = await _context.Training.FirstOrDefaultAsync(tr => tr.TrainingId == trainingId);
 			try
 			{
 				if (trainingToDelete == null)
@@ -67,6 +67,37 @@ namespace TrainingTracker.Controllers
 				return BadRequest();
 				throw;
 			}
+		}
+
+		[HttpPatch("patchtraining/{id}")]
+		public async Task<IActionResult> PutTraining(int id, [FromBody] Training newTraining)
+		{
+			var trainingToUpdate = await _context.Training.SingleOrDefaultAsync(tr => tr.TrainingId == id);
+
+			if (trainingToUpdate == null)
+			{
+				return NotFound();
+			}
+
+			try
+			{
+				trainingToUpdate.TrainingId = newTraining.TrainingId;
+				trainingToUpdate.Name = newTraining.Name;
+				trainingToUpdate.Description = newTraining.Description;
+				trainingToUpdate.DateTime = newTraining.DateTime;
+				trainingToUpdate.Calories = newTraining.Calories;
+
+				await _context.SaveChangesAsync();
+				return Ok(trainingToUpdate);
+
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error updating the training: {ex.Message}");
+				throw;
+			}
+
+
 		}
 
 	}
