@@ -131,3 +131,6 @@ C:\Users\Nika\source\repos\TrainingTracker\TrainingTracker_API\obj\Debug\net8.0\
 C:\Users\Nika\source\repos\TrainingTracker\TrainingTracker_API\obj\Debug\net8.0\TrainingApp.API.pdb
 C:\Users\Nika\source\repos\TrainingTracker\TrainingTracker_API\obj\Debug\net8.0\TrainingApp.API.genruntimeconfig.cache
 C:\Users\Nika\source\repos\TrainingTracker\TrainingTracker_API\obj\Debug\net8.0\ref\TrainingApp.API.dll
+C:\Users\Nika\source\repos\TrainingTracker\trainingTracker_api\bin\Debug\net8.0\Npgsql.dll
+C:\Users\Nika\source\repos\TrainingTracker\trainingTracker_api\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Nika\source\repos\TrainingTracker\TrainingTracker_API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

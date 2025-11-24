@@ -7,12 +7,16 @@ namespace TrainingTracker
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
-			string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+			string connectionString = builder.Configuration.GetConnectionString("PostgreSQLConnection");
 
 			// Add services to the container.
 
 			builder.Services.AddDbContext<TrainingDbContext>(options =>
-			options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+			options.UseNpgsql(connectionString, op =>
+			op.EnableRetryOnFailure(
+				maxRetryCount: 5,
+				maxRetryDelay: TimeSpan.FromSeconds(20),
+				errorCodesToAdd: null)));//, ServerVersion.AutoDetect(connectionString)));
 
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -19,28 +19,17 @@ namespace TrainingTracker.Controllers
 		[HttpGet("gettraining")]
 		public async Task<ActionResult<IEnumerable<Training>>> GetTraining()
 		{
-			var _trainings = await _context.Training.ToListAsync();
+			var _trainings = await _context.Training.AsNoTracking().ToListAsync();
 			return Ok(_trainings);
 		}
 
-		[HttpPost("posttraining")]
+		[HttpPost("posttraining")]//in work, fix the id bullshit
 		public async Task<IActionResult> PostTraining([FromBody] Training training)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
-
-			if (_context.Training.Count() == 0)
-			{
-				training.TrainingId = 1;
-			}
-			else
-			{
-				training.TrainingId = _context.Training.Count() + 1;
-			}
-
-			await _context.Entry(training).ReloadAsync();
 
 			await _context.AddAsync(training);
 			await _context.SaveChangesAsync();
@@ -50,54 +39,43 @@ namespace TrainingTracker.Controllers
 		[HttpDelete("deletetraining/{trainingId}")]
 		public async Task<IActionResult> DeleteTraining(int trainingId)
 		{
-			var trainingToDelete = await _context.Training.FirstOrDefaultAsync(tr => tr.TrainingId == trainingId);
 			try
 			{
-				if (trainingToDelete == null)
+				var rowsAffectedDelete = await _context.Training.Where(tr => tr.TrainingId == trainingId).ExecuteDeleteAsync();
+				if (rowsAffectedDelete == 0)
 				{
-					throw new Exception("Training was null");
+					return Ok("raining already deleted or did not exist.");
 				}
-				_context.Remove(trainingToDelete);
-				_context.SaveChanges();
-				return Ok(trainingToDelete);
+				return Ok("Deleted successfully");
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine("Exception druing deleting the training: " + ex.Message);
-				return BadRequest();
-				throw;
+				Console.WriteLine("Exception during deleting training: " + ex.Message);
+				return BadRequest(ex.Message);
 			}
 		}
 
 		[HttpPatch("patchtraining/{id}")]
-		public async Task<IActionResult> PutTraining(int id, [FromBody] Training newTraining)
+		public async Task<IActionResult> PutTraining(int trainingId, [FromBody] Training newTraining)
 		{
-			var trainingToUpdate = await _context.Training.SingleOrDefaultAsync(tr => tr.TrainingId == id);
-
-			if (trainingToUpdate == null)
-			{
-				return NotFound();
-			}
-
 			try
 			{
-				trainingToUpdate.TrainingId = newTraining.TrainingId;
-				trainingToUpdate.Name = newTraining.Name;
-				trainingToUpdate.Description = newTraining.Description;
-				trainingToUpdate.DateTime = newTraining.DateTime;
-				trainingToUpdate.Calories = newTraining.Calories;
+				var rowsAffectedUpdate = await _context.Training.Where(tr => tr.TrainingId == trainingId).ExecuteUpdateAsync(upd => upd
+				.SetProperty(t => t.Name, newTraining.Name)
+				.SetProperty(t => t.DateTime, newTraining.DateTime)
+				.SetProperty(t => t.Calories, newTraining.Calories)
+				.SetProperty(t => t.Duration, newTraining.Duration)
+				.SetProperty(t => t.Description, newTraining.Description)
+				);
 
-				await _context.SaveChangesAsync();
-				return Ok(trainingToUpdate);
-
+				if (rowsAffectedUpdate == 0)
+					return NotFound("No rows was found");
+				return Ok("Training was updated!");
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine($"Error updating the training: {ex.Message}");
-				throw;
+				return BadRequest("Error while updating training: " + ex.Message);
 			}
-
-
 		}
 
 	}

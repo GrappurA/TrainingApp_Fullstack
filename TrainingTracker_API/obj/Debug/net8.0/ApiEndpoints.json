@@ -37,6 +37,32 @@
   },
   {
     "ContainingType": "TrainingTracker.Controllers.TrainingController",
+    "Method": "PutTraining",
+    "RelativePath": "api/Training/patchtraining/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trainingId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "newTraining",
+        "Type": "TrainingTracker.Models.Training",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrainingTracker.Controllers.TrainingController",
     "Method": "PostTraining",
     "RelativePath": "api/Training/posttraining",
     "HttpMethod": "POST",
