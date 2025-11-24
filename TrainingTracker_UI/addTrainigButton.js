@@ -19,7 +19,7 @@ form.addEventListener("submit", async (e) => {
             body: JSON.stringify(training)
         });
         if (!response.ok)
-            throw new Error("Failed to add training" + response.error);
+            throw new Error("Failed to add training: " + response.error);
 
         const saved = await response.json();
         addTrainingToUI(saved);
