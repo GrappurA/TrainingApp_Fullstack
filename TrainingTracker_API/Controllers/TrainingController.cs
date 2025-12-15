@@ -19,7 +19,7 @@ namespace TrainingTracker.Controllers
 		[HttpGet("gettraining")]
 		public async Task<ActionResult<IEnumerable<Training>>> GetTraining()
 		{
-			var _trainings = await _context.Training.AsNoTracking().ToListAsync();
+			var _trainings = await _context.Trainings.AsNoTracking().ToListAsync();
 			return Ok(_trainings);
 		}
 
@@ -31,6 +31,8 @@ namespace TrainingTracker.Controllers
 				return BadRequest(ModelState);
 			}
 
+			//training.UserId =	
+
 			await _context.AddAsync(training);
 			await _context.SaveChangesAsync();
 			return Ok(training);
@@ -41,7 +43,7 @@ namespace TrainingTracker.Controllers
 		{
 			try
 			{
-				var rowsAffectedDelete = await _context.Training.Where(tr => tr.TrainingId == trainingId).ExecuteDeleteAsync();
+				var rowsAffectedDelete = await _context.Trainings.Where(tr => tr.TrainingId == trainingId).ExecuteDeleteAsync();
 				if (rowsAffectedDelete == 0)
 				{
 					return Ok("raining already deleted or did not exist.");
@@ -60,7 +62,7 @@ namespace TrainingTracker.Controllers
 		{
 			try
 			{
-				var rowsAffectedUpdate = await _context.Training.Where(tr => tr.TrainingId == trainingId).ExecuteUpdateAsync(upd => upd
+				var rowsAffectedUpdate = await _context.Trainings.Where(tr => tr.TrainingId == trainingId).ExecuteUpdateAsync(upd => upd
 				.SetProperty(t => t.Name, newTraining.Name)
 				.SetProperty(t => t.DateTime, newTraining.DateTime)
 				.SetProperty(t => t.Calories, newTraining.Calories)
@@ -77,6 +79,7 @@ namespace TrainingTracker.Controllers
 				return BadRequest("Error while updating training: " + ex.Message);
 			}
 		}
+		
 
 	}
 }

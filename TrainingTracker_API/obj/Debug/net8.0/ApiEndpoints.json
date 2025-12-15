@@ -76,5 +76,41 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrainingApp.API.Controllers.UserController",
+    "Method": "DeleteAllUsers",
+    "RelativePath": "api/User/deleteall",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrainingApp.API.Controllers.UserController",
+    "Method": "GetUsers",
+    "RelativePath": "api/User/getusers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrainingApp.API.Controllers.UserController",
+    "Method": "Register",
+    "RelativePath": "api/User/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "TrainingApp.API.DTOs.UserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

@@ -12,16 +12,25 @@ namespace TrainingTracker
 			// Add services to the container.
 
 			builder.Services.AddDbContext<TrainingDbContext>(options =>
-			options.UseNpgsql(connectionString, op =>
+			options.UseNpgsql(connectionString));  /*,op =>
 			op.EnableRetryOnFailure(
 				maxRetryCount: 5,
 				maxRetryDelay: TimeSpan.FromSeconds(20),
-				errorCodesToAdd: null)));//, ServerVersion.AutoDetect(connectionString)));
+				errorCodesToAdd: null)));
+			*/
+			builder.Services.AddDbContext<UserDbContext>(options =>
+			options.UseNpgsql(connectionString)); /*,op =>
+			op.EnableRetryOnFailure(
+				maxRetryCount: 5,
+				maxRetryDelay: TimeSpan.FromSeconds(20),
+				errorCodesToAdd: null)));
+			//, ServerVersion.AutoDetect(connectionString)));
+			*/
 
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
-			//builder.Services.AddSwaggerGen();
+			builder.Services.AddSwaggerGen();
 
 			builder.Services.AddCors(options =>
 			{
@@ -39,8 +48,8 @@ namespace TrainingTracker
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
 			{
-				//app.UseSwagger();
-				//app.UseSwaggerUI();
+				app.UseSwagger();
+				app.UseSwaggerUI();
 			}
 
 			app.UseHttpsRedirection();

@@ -7,6 +7,6 @@ namespace TrainingTracker
 	{
 		public TrainingDbContext(DbContextOptions<TrainingDbContext> options) : base(options) { }
 
-		public DbSet<Training> Training => Set<Training>();
+		public DbSet<Training> Trainings => Set<Training>();
 	}
 }

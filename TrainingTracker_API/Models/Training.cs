@@ -1,4 +1,7 @@
-﻿namespace TrainingTracker.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TrainingApp.API.Models;
+
+namespace TrainingTracker.Models
 {
 	public class Training
 	{
@@ -9,5 +12,9 @@
 		public double Calories { get; set; }
 		public DateOnly DateTime { get; set; }
 		public int Duration { get; set; }
+
+		public Guid UserId { get; set; }
+		[ForeignKey("UserId")]
+		public User? User { get; set; }
 	}
 }

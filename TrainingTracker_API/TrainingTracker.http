@@ -1,6 +1,14 @@
-@TrainingTracker_HostAddress = http://localhost:5042
+@TrainingTracker_HostAddress = http://localhost:5042/
 
-GET {{TrainingTracker_HostAddress}}/gettrainings/
+GET {{TrainingTracker_HostAddress}}api/training/gettraining/
 Accept: application/json
 
+###
+
+POST {{TrainingTracker_HostAddress}}api/user/register
+Accept: application/json
+
+###
+
+DELETE {{TrainingTracker_HostAddress}}/api/user/deleteall
 ###
