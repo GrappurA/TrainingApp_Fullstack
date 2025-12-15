@@ -9,6 +9,7 @@ form.addEventListener("submit", async (e) => {
         duration: parseInt(document.getElementById("duration").value),
         dateTime: document.getElementById("date").value,
         description: document.getElementById("description").value,
+        currentUser: 
         
     };
 

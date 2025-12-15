@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Share+Tech&display=swap"
+        rel="stylesheet">
+    <title>Account</title>
+</head>
+
+<body class="flex justify-center bg-[url(/img/background_home.png)] select-none min-h-screen h-full">
+    <div id="account-main-container"
+        class="bg-[url(/img/oni.png)] bg-[length:auto] bg-repeat w-[1000px] max-w-[1300px] rounded-3xl h-fit">
+        <div id="menu" class="text-4xl flex border-4 border-[#ff4d4d] rounded-[120px] ml-2 mr-2 mt-1 bg-[#313638]">
+
+            <a href="index.html" id="home-button"
+                class="mt-[4%] ml-[31%] mr-[2%] transition-transform duration-300 hover:text-[#349777] hover:scale-120">Home</a>
+
+            <a href="index.html" id="home-logo"
+                class=" mr-[1.5%] transition-transform duration-300 hover:scale-110 w-[120px] h-auto p-0 flex-center"><img
+                    src="img/logo.png" alt="logo"></a>
+
+            <a href="statistics.html" id="stats-button"
+                class="mt-[4%] transition-transform duration-300 hover:text-[#349777] hover:scale-120">Statistics</a>
+
+            <a href="account.html"><img src="img/user.png" alt="account icon" id="account-button"
+                    class="w-[50px] h-auto m-1 mt-[40%] hover:scale-110 transition-transform duration-300 ml-[390%] mt-[63%]"></a>
+        </div>
+
+        <div id="account-main-menu"
+            class="border-4 rounded-2xl rounded-3xl h-auto border-[#ff4d4d] bg-[#282b2c] m-1 mt-2 mb-2">
+            <form action="">
+                <section class="flex justify-center items-center flex-col">
+
+                    <input type="email" name="" id="account-email"
+                        class="rounded-2xl text-2xl border-2 border-[#f09d51] p-1 m-1 mt-2 flex placeholder-gray-300" placeholder="Email">
+                    <input type="text" name="" id="account-username"
+                        class="rounded-2xl text-2xl border-2 border-[#f09d51] p-1 m-1 mt-2 flex placeholder-gray-300" placeholder="Username">
+                    <input type="password" id="account-password" placeholder="Password"
+                        class="rounded-2xl text-2xl border-2 border-[#f09d51] p-1 m-1 mt-2 flex placeholder-gray-300">
+                    <button
+                        class="rounded-2xl text-2xl border-2 border-[#000000] bg-green-300 p-1 m-1 mt-2 flex transition-transform duration-300 hover:scale-110"
+                        id="register-button" type="submit">Register</button>
+            </form>
+            <p>Already have an account? <a href="" class="underline">Log In</a></p>
+            </section>
+        </div>
+        <script src="accountButton.js" defer></script>
+</body>
+
+</html>
