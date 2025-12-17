@@ -1,6 +1,6 @@
 const registerButton = document.getElementById("register-button");
 registerButton.onclick = async (event) => {
-       
+
        registerButton.disabled = true;
        event.preventDefault();
 
@@ -20,15 +20,16 @@ registerButton.onclick = async (event) => {
               const errorText = await response.text();
               if (response.status == 400 && errorText == "User already exists!") {
                      alert("nice!")
-              }      
+              }
               alert(errorText);
-              
               registerButton.disabled = false;
        }
-       else
-       {
+       else {
               registerButton.disabled = false;
-              
+              location.replace("./index.html");
+              const section = document.getElementById("account-section");
+             // section.dataset.currentUser =  
+              //continue here, what comes after the registration
        }
 
 };
