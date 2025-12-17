@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrainingTracker.Models;
@@ -7,6 +8,7 @@ namespace TrainingTracker.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
+	[Authorize]
 	public class TrainingController : ControllerBase
 	{
 		private readonly TrainingDbContext _context;
@@ -79,7 +81,7 @@ namespace TrainingTracker.Controllers
 				return BadRequest("Error while updating training: " + ex.Message);
 			}
 		}
-		
+
 
 	}
 }

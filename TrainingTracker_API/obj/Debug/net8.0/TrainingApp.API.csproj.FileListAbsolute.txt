@@ -150,4 +150,7 @@ C:\Users\Nika\source\repos\TrainingTracker\TrainingTracker_API\bin\Debug\net8.0\
 C:\Users\Nika\source\repos\TrainingTracker\TrainingTracker_API\bin\Debug\net8.0\System.Reactive.dll
 C:\Users\Nika\source\repos\TrainingTracker\TrainingTracker_API\bin\Debug\net8.0\Websocket.Client.dll
 C:\Users\Nika\source\repos\TrainingTracker\trainingtracker_api\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\Nika\source\repos\TrainingTracker\TrainingTracker_API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Nika\source\repos\TrainingTracker\TrainingTracker_API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Nika\source\repos\TrainingTracker\TrainingTracker_API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Nika\source\repos\TrainingTracker\TrainingTracker_API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
