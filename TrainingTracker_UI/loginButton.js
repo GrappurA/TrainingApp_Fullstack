@@ -16,13 +16,20 @@ loginButton.onclick = async (event) => {
 
         if (!response.ok) {
             const errorText = await response.text();
+            if(errorText.length > 30)
+                alert("Error during log in!")
             alert(errorText);
         }
         else {
-
+            //successful login
+            const data = await response.json();
+            localStorage.setItem("token" , data.token);
+            location.replace("./index.html");
         }
 
     } catch (error) {
+        if(error.text.length > 30)
+            alert("Invalid Operation");
         alert(error.text)
     }
 

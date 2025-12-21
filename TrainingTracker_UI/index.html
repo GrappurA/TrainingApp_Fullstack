@@ -30,7 +30,8 @@
         class="mt-[4%] transition-transform duration-300 hover:text-[#349777] hover:scale-120">Statistics</a>
 
       <section id="account-section" class="ml-10 mt-[4%]">
-        <p id="account-name" class="text-xl p-1 inline transition-transform duration-300 hover:text-[#000000]">account_name</p>
+        <p id="account-name" class="text-xl p-1 inline transition-transform duration-300 hover:text-[#000000]">
+          account_name</p>
 
         <a href="account.html"><img src="img/user.png" alt="account icon" id="account-button"
             class="w-[50px] h-auto hover:scale-110 transition-transform duration-300 inline ml-[0%] mt-[0%]"></a>
@@ -52,11 +53,11 @@
       <form id="training-form" class="latest-trainings-item max-w-md mx-auto rounded-3xl shadow-xl space-y-3">
         <p class="text-green-300 w-full text-center inset-auto text-2xl border-3 rounded-xl p-1 border-double">Create
           Training</p>
-        <input id="name" type="text" placeholder="Training name" class="input input-bordered pt-1" />
+        <input id="name" type="text" placeholder="Training name" class="input input-bordered pt-1" required />
         <hr class="border-2 text-[#f09d51]">
-        <input id="date" type="date" class="input input-bordered pt-1" placeholder="dd/mm/yyyy" />
+        <input id="date" type="date" class="input input-bordered pt-1" placeholder="dd/mm/yyyy" required />
         <hr class="border-2 text-[#f09d51]">
-        <input id="duration" type="number" placeholder="Duration (min)" class="input input-bordered pt-1" />
+        <input id="duration" type="number" placeholder="Duration (min)" class="input input-bordered pt-1" required />
         <hr class="border-2 text-[#f09d51]">
 
         <textarea id="description" placeholder="Description"
@@ -94,12 +95,11 @@
 
   </div>
 
-  <script src="fetchOnReload.js"></script>
-  <script src="addTrainigButton.js"></script>
-  <script src="deleteButton.js"></script>
+  <script src="addTrainigButton.js" defer></script>
+  <script src="deleteButton.js" defer></script>
   <script src="editButton.js" defer></script>
-  <script src="accountButton.js"></script>
-  <script src="afterRegistration.js"></script>
+  <script src="accountButton.js" defer></script>
+  <script src="fetchOnReload.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,7 @@
+const token = localStorage.getItem("token");
+if (!token)
+    location.replace("./login.html");
+
 container.addEventListener("click", async (e) => {
     if (e.target.classList.contains("edit-button")) {
         try {
@@ -40,7 +44,10 @@ container.addEventListener("click", async (e) => {
 
                 const response = await fetch(`http://localhost:5042/api/training/patchtraining/${idToEdit}`, {
                     method: "PATCH",
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
                     body: JSON.stringify(newTraining)
                 });
 

@@ -1,4 +1,8 @@
 const registerButton = document.getElementById("register-button");
+const token = localStorage.getItem("token");
+if(!token)
+       location.replace("./login.html");
+
 registerButton.onclick = async (event) => {
 
        registerButton.disabled = true;
@@ -12,7 +16,9 @@ registerButton.onclick = async (event) => {
        };
        const response = await fetch(`http://localhost:5042/api/user/register`, {
               method: "POST",
-              headers: { "Content-Type": "application/json" },
+              headers: { "Content-Type": "application/json",
+                     "Authorization": `Bearer ${token}`,
+               },
               body: JSON.stringify(newUser)
        });
 

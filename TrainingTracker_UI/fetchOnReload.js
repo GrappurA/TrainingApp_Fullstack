@@ -1,49 +1,69 @@
 document.onload = loadData;
 
+const form = document.getElementById("training-form");
+const trainingItems = document.getElementById("training-items");
+
+const token = localStorage.getItem("token");
+if (!token)
+    location.replace("./login.html");
+
+function addTrainingToUI(training) {
+    const div = document.createElement("div");
+    div.classList.add("latest-trainings-item");
+    div.innerHTML = `<div class="crud-buttons ">
+          <button id="edit-button"
+            class="edit-button w-10 h-10 rounded-2xl border-3 hover:scale-110 transition-transform duration-200"><img
+              src="img/edit.png" alt="edit_button" class="p-1 w-[100px] h-auto edit-button"></button>
+          <button id="delete-button"
+            class="delete-button w-10 h-10 rounded-2xl border-3 hover:scale-110 transition-transform duration-200"><img
+              src="img/delete.png" alt="delete_button" class="p-1 w-[100px] h-auto delete-button"></button>
+          <button id="more-button"
+            class="w-10 h-10 rounded-2xl border-3 hover:scale-110 transition-transform duration-200"><img
+              src="img/more.png" alt="delete_button" class="p-1 w-[100px] h-auto more-button"></button>
+        </div>
+         <h3 class="text-lg font-semibold">${training.name} ID: №${training.trainingId}</h3>
+         <hr class="border-2">
+    <p>${training.dateTime}</p>
+    <hr class="border-2">
+    <p>${training.duration} min</p> 
+    <hr class="border-2">
+    <p>${training.description}</p>   
+    `;
+
+    div.dataset.trainingId = training.trainingId;
+    div.dataset.name = training.name;
+    div.dataset.dateTime = training.dateTime;
+    div.dataset.description = training.description;
+    div.dataset.duration = training.duration;
+    div.classList.add('is-entering');
+
+    trainingItems.append(div);
+
+    // 2. Use requestAnimationFrame to ensure the browser has painted
+    //    the 'is-entering' state before applying 'entered'.
+    //    This makes the transition visible.
+    requestAnimationFrame(() => {
+        div.classList.add('entered');
+        // Optional: Remove the classes after the animation to keep the DOM clean
+        // You could also listen for 'transitionend' like with deletion
+        div.addEventListener('transitionend', () => {
+            div.classList.remove('is-entering', 'entered');
+        }, { once: true });
+    });
+}
+
 async function loadData() {
-    /*
-     //testing
-    const test_trainings = [
-        {
-            name: "Morning Cardio",
-            duration: 45,
-            dateTime: "2025-10-28T07:30:00",
-            description: "High-intensity interval running and cycling to boost endurance."
-        },
-        {
-            name: "Strength Training",
-            duration: 60,
-            dateTime: "2025-10-28T18:00:00",
-            description: "Full-body weight training focusing on compound lifts."
-        },
-        {
-            name: "Yoga Session",
-            duration: 50,
-            dateTime: "2025-10-29T08:15:00",
-            description: "Flexibility and mindfulness training to improve recovery and balance."
-        },
-        {
-            name: "Kickboxing Practice",
-            duration: 70,
-            dateTime: "2025-10-30T17:00:00",
-            description: "Punch, kick, and combo drills to enhance coordination and power."
-        },
-        {
-            name: "Evening Stretch",
-            duration: 30,
-            Date: "2025-10-31T21:00:00",
-            description: "Relaxed stretching and mobility exercises before bedtime."
-        }
-    ];
-
-    for (test_training of test_trainings) {
-        addTrainingToUI(test_trainings);
-    }    */
-
     try {
-        const response = await fetch("http://localhost:5042/api/training/gettraining");
-        if (!response.ok)
+        const response = await fetch("http://localhost:5042/api/training/gettraining", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+        if (!response.ok) {
+            const shi = response.text;
             throw new Error("Failed to fetch data on page load.");
+        }
 
         const saved = await response.json();
         saved.forEach(el => {

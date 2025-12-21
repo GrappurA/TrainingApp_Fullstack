@@ -1,8 +1,13 @@
+const addButton = document.getElementById("addTrainingBtn");
 const form = document.getElementById("training-form");
 const trainingItems = document.getElementById("training-items");
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+const token = localStorage.getItem("token");
+if(!token)
+       location.replace("./login.html");
+
+form.addEventListener("submit",async (event) => {
+    event.preventDefault();
 
     const training = {
         name: document.getElementById("name").value,
@@ -14,7 +19,9 @@ form.addEventListener("submit", async (e) => {
     try {
         const response = await fetch("http://localhost:5042/api/training/posttraining", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json",
+                 "Authorization": `Bearer ${token}`
+             },
             body: JSON.stringify(training)
         });
         if (!response.ok)

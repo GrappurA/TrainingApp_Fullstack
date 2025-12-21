@@ -1,5 +1,9 @@
 const container = document.getElementById("training-items");
 
+const token = localStorage.getItem("token");
+if (!token)
+    location.replace("./login.html");
+
 container.addEventListener("click", async (e) => {
     if (e.target.classList.contains("delete-button")) {
         try {
@@ -8,7 +12,10 @@ container.addEventListener("click", async (e) => {
 
             const url = `http://localhost:5042/api/training/deletetraining/${idToRemove}`;
             await fetch(url, {
-                method: "DELETE"
+                method: "DELETE",
+                headers: {
+                     "Authorization": `Bearer ${token}`
+                },
             });
 
             itemToRemove.classList.add('is-deleting');
