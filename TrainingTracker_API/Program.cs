@@ -1,5 +1,7 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace TrainingTracker
 {
@@ -12,14 +14,14 @@ namespace TrainingTracker
 
 			// Add services to the container.
 
-			builder.Services.AddDbContext<TrainingDbContext>(options =>
+			builder.Services.AddDbContext<AppDbContext>(options =>
 			options.UseNpgsql(connectionString));  /*,op =>
 			op.EnableRetryOnFailure(
 				maxRetryCount: 5,
 				maxRetryDelay: TimeSpan.FromSeconds(20),
 				errorCodesToAdd: null)));
 			*/
-			builder.Services.AddDbContext<UserDbContext>(options =>
+			builder.Services.AddDbContext<AppDbContext>(options =>
 			options.UseNpgsql(connectionString)); /*,op =>
 			op.EnableRetryOnFailure(
 				maxRetryCount: 5,
@@ -28,31 +30,26 @@ namespace TrainingTracker
 			//, ServerVersion.AutoDetect(connectionString)));
 			*/
 
-			//adding jwt service 
-			/*
-			builder.Services.AddScoped<TrainingApp.API.Services.JwtService>();
-			builder.Services.AddAuthentication(options =>
+			//adding jwt
+			builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+			.AddJwtBearer(options =>
 			{
-				options.DefaultAuthenticateScheme = Microsoft.AspNetCore.Authentication.JwtBearer
-				.JwtBearerDefaults.AuthenticationScheme;
+				var env = Environment.GetEnvironmentVariable("TrainingTracker_env");
 
-				options.DefaultChallengeScheme = Microsoft.AspNetCore.Authentication.JwtBearer
-				.JwtBearerDefaults.AuthenticationScheme;
-			}).AddJwtBearer(options =>
-			{
-				options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+				options.TokenValidationParameters = new TokenValidationParameters
 				{
+
 					ValidateIssuer = true,
 					ValidateAudience = true,
 					ValidateLifetime = true,
 					ValidateIssuerSigningKey = true,
-					ValidIssuer = builder.Configuration["Jwt:Issuer"],
-					ValidAudience = builder.Configuration["Jwt:Audience"],
-					IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
-					System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+					ValidIssuer = "localhost:5173",
+					ValidAudience = "localhost:5173",
+					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("TrainingTracker_env")))
 				};
 			});
-			*/
+			builder.Services.AddAuthorization();
+
 
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -81,8 +78,8 @@ namespace TrainingTracker
 
 			app.UseHttpsRedirection();
 
-			//app.UseAuthorization();
 			app.UseAuthentication();
+			app.UseAuthorization();
 
 			app.MapControllers();
 

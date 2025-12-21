@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrainingTracker.Models;
+using TrainingApp.API.Models;
+using System.Security.Claims;
 
 namespace TrainingTracker.Controllers
 {
@@ -11,21 +13,33 @@ namespace TrainingTracker.Controllers
 	[Authorize]
 	public class TrainingController : ControllerBase
 	{
-		private readonly TrainingDbContext _context;
+		private readonly AppDbContext _context;
 
-		public TrainingController(TrainingDbContext context)
+		public TrainingController(AppDbContext context)
 		{
 			_context = context;
 		}
 
-		[HttpGet("gettraining")]
+		[HttpGet("gettraining")] //of a specific user
 		public async Task<ActionResult<IEnumerable<Training>>> GetTraining()
 		{
-			var _trainings = await _context.Trainings.AsNoTracking().ToListAsync();
+			string userLogin = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			Guid userId = await _context
+				.Users.AsNoTracking()
+				.Where(u => u.Login == userLogin)
+				.Select(u => u.Id)
+				.FirstOrDefaultAsync();
+
+			var _trainings = await _context
+				.Trainings
+				.AsNoTracking()
+				.Where(t => t.UserId == userId)
+				.Select(t => t)
+				.ToListAsync();
 			return Ok(_trainings);
 		}
 
-		[HttpPost("posttraining")]//in work, fix the id bullshit
+		[HttpPost("posttraining")]
 		public async Task<IActionResult> PostTraining([FromBody] Training training)
 		{
 			if (!ModelState.IsValid)
@@ -33,7 +47,11 @@ namespace TrainingTracker.Controllers
 				return BadRequest(ModelState);
 			}
 
-			//training.UserId =	
+			//validating info for the specific user
+			string userLogin = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			Guid userId = await _context.Users.AsNoTracking().Where(u => u.Login == userLogin).Select(u => u.Id).FirstOrDefaultAsync();
+
+			training.UserId = userId;
 
 			await _context.AddAsync(training);
 			await _context.SaveChangesAsync();
