@@ -1,6 +1,3 @@
-if (!token)
-    location.replace("./login.html");
-
 container.addEventListener("click", async (e) => {
     if (e.target.classList.contains("edit-button")) {
         try {
@@ -27,40 +24,55 @@ container.addEventListener("click", async (e) => {
                 editMenu.classList.remove("invisible");
             }
 
-            editSubmitButton.onclick = async () => {
+            editSubmitButton.onclick = async (event) => {
+                try {
+                    event.preventDefault();
 
-                itemToEdit.dataset.name = await document.getElementById("edit-name").value;
-                itemToEdit.dataset.dateTime = await document.getElementById("edit-date").value;
-                itemToEdit.dataset.duration = await parseInt(document.getElementById("edit-duration").value);
-                itemToEdit.dataset.description = await document.getElementById("edit-description").value;
-                const newTraining = {
-                    trainingId: idToEdit,
-                    name: itemToEdit.dataset.name,//document.getElementById("edit-name").value,
-                    duration: itemToEdit.dataset.duration,//parseInt(document.getElementById("edit-duration").value),
-                    dateTime: itemToEdit.dataset.dateTime,//document.getElementById("edit-date").value,
-                    description: itemToEdit.dataset.description,//document.getElementById("edit-description").value,
-                };
+                    const durationVal = document.getElementById("edit-duration").value;
+                    const dateVal = document.getElementById("edit-date").value;
 
-                const response = await fetch(`http://localhost:5042/api/training/patchtraining/${idToEdit}`, {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    },
-                    body: JSON.stringify(newTraining)
-                });
+                    itemToEdit.dataset.name = document.getElementById("edit-name").value;
+                    itemToEdit.dataset.dateTime = dateVal;
+                    itemToEdit.dataset.duration = durationVal;
+                    itemToEdit.dataset.description = document.getElementById("edit-description").value;
 
-                if (!response.ok)
-                    alert("failed to update training");
+                    const newTraining = {
+                        Id: parseInt(idToEdit),
+                        Name:  document.getElementById("edit-name").value,//document.getElementById("edit-name").value,
+                        Duration: parseInt(document.getElementById("edit-duration").value),//parseInt(document.getElementById("edit-duration").value),
+                        DateTime: document.getElementById("edit-date").value,//document.getElementById("edit-date").value,
+                        Description: document.getElementById("edit-description").value,
+                        Calories: 0
+                    };
 
-                makeInvisible();
-                updateUI(itemToEdit, newTraining);
+                    try {
+                        const itemToEdit = e.target.closest(".latest-trainings-item");
+                        const idToEdit = itemToEdit.dataset.trainingId;
 
+                        const url = `http://localhost:5042/api/training/patchtraining/${idToEdit}`;
+                        const response = await fetch(url, {
+                            method: "PATCH",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${token}`
+                            },
+                            body: JSON.stringify(newTraining)
 
-            };
+                        });
 
-            async function updateUI(itemToEdit, newTraining) {
-                itemToEdit.innerHTML = `
+                        if (!response.ok)
+                            //alert("failed to update training");
+                            alert(response.statusText)
+
+                    } catch (error) {
+                        console.log(error);
+                    }
+
+                    makeInvisible();
+                    updateUI(itemToEdit, newTraining);
+
+                    async function updateUI(itemToEdit, newTraining) {
+                        itemToEdit.innerHTML = `
                 <div class="crud-buttons ">
           <button id="edit-button"
             class="edit-button w-10 h-10 rounded-2xl border-3 hover:scale-110 transition-transform duration-200"><img
@@ -80,12 +92,16 @@ container.addEventListener("click", async (e) => {
     <hr class="border-2">
     <p>${newTraining.description}</p>
                 `;
+                    }
+
+                } catch (err) {
+                    alert(err);
+                }
+
             }
 
         } catch (err) {
-            alert(err);
+
         }
-
     }
-
 });

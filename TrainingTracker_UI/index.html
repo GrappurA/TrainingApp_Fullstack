@@ -29,7 +29,8 @@
         class="mt-[4%] transition-transform duration-300 hover:text-[#349777] text-[#DBD3D8] hover:scale-120">Statistics</a>
 
       <section id="account-section" class="ml-10 mt-[4%]">
-        <p id="account-name" class="text-xl p-1 text-[#DBD3D8] inline transition-transform duration-300 hover:text-[#000000]">
+        <p id="account-name"
+          class="text-xl p-1 text-[#DBD3D8] inline transition-transform duration-300 hover:text-[#000000]">
           account_name</p>
 
         <a href="account.html"><img src="img/user.png" alt="account icon" id="account-button"
@@ -38,57 +39,74 @@
 
     </div>
 
-    <p class="text-3xl text-[#f09d51] ml-2 mt-3 mb-4 p-2 rounded-3xl border-[#ff4d4d] border-4 h-fit w-fit bg-[#313638]">Latest
+    <p
+      class="text-3xl text-[#f09d51] ml-2 mt-3 mb-4 p-2 rounded-3xl border-[#ff4d4d] border-4 h-fit w-fit bg-[#313638]">
+      Latest
       Trainings</p>
-  
+
     <div id="training-items"
       class="max-w-[1300px] border-[#ff4d4d] border-4 m-2 mt-1 grid grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-3 rounded-2xl">
 
       <form id="training-form" class="latest-trainings-item max-w-md mx-auto rounded-3xl shadow-xl space-y-3">
         <p class="text-green-300 w-full text-center inset-auto text-2xl border-3 rounded-xl p-1 border-double">Create
           Training</p>
-        <input id="name" type="text" placeholder="Training name" class="input input-bordered pt-1 text-[#DBD3D8]" required />
+        <input id="name" type="text" placeholder="Training name" class="input input-bordered pt-1 text-[#DBD3D8]"
+          required />
         <hr class="border-2 text-[#f09d51]">
-        <input id="date" type="date" class="input input-bordered pt-1 text-[#DBD3D8]" placeholder="dd/mm/yyyy" required />
+        <input id="date" type="date" class="input input-bordered pt-1 text-[#DBD3D8]" placeholder="dd/mm/yyyy"
+          required />
         <hr class="border-2 text-[#f09d51]">
-        <input id="duration" type="number" placeholder="Duration (min)" class="input input-bordered pt-1 text-[#DBD3D8]" required />
+        <input id="duration" type="number" placeholder="Duration (min)" class="input input-bordered pt-1 text-[#DBD3D8]"
+          required />
         <hr class="border-2 text-[#f09d51]">
 
         <textarea id="description" placeholder="Description"
           class="textarea textarea-bordered flex-1 w-50 h-8 pt-1 min-h-10 text-[#DBD3D8]"></textarea>
         <button id="addTrainingBtn" type="submit"
-          class="btn btn-primary bg-green-300 border-3 rounded-3xl hover:scale-105 transition-transform duration-200 ml-[17%] p-2 hover:underline">Add
+          class="disabled:opacity-50 disabled:cursor-not-allowed btn btn-primary bg-green-300 border-3 rounded-3xl hover:scale-105 transition-transform duration-200 ml-[17%] p-2 hover:underline">Add
           Training</button>
       </form>
     </div>
 
-    <div id="edit-overlay" class="modal-overlay invisible">
+  </div>
 
-      <div id="edit-menu"
-        class="bg-[#FB8B24] rounded-3xl border-3 p-2 mx-auto text-2xl max-w-110 max-h-100 p-2 m-0 w-71">
-        <input id="edit-name" type="text" class="input input-bordered pt-1" placeholder="Name" />
-        <hr class="border-2">
-        <input id="edit-date" type="date" class="input input-bordered pt-1" />
-        <hr class="border-2">
-        <input id="edit-duration" type="number" placeholder="Duration (min)" class="input input-bordered pt-1 w-fit" />
-        <hr class="border-2">
-        <textarea id="edit-description" placeholder="Description"
-          class="textarea textarea-bordered flex-1 min-w-10 max-w-65 w-90 min-h-8 max-h-60 h-8 pt-1"></textarea>
-        <button type="submit" id="edit-submit-button"
-          class="btn btn-primary border-3 rounded-3xl hover:scale-105 transition-transform duration-200 mt-[5%] p-1 hover:underline block w-66">Save</button>
-      </div>
+  <div id="edit-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
 
-      <div id="account-overlay">
-        <div id="account-menu" class="modal-overlay">
+    <div id="edit-menu"
+      class="bg-[#FB8B24] rounded-3xl border-4 border-black p-6 shadow-2xl w-full max-w-sm flex flex-col gap-4 relative">
 
-        </div>
+      <h2 class="text-xl font-bold text-center text-white drop-shadow-md">Edit Training</h2>
+
+      <input id="edit-name" type="text"
+        class="input w-full p-2 rounded-xl border-2 border-gray-300 focus:outline-none focus:border-blue-500"
+        placeholder="Name" />
+
+      <input id="edit-date" type="datetime-local"
+        class="input w-full p-2 rounded-xl border-2 border-gray-300 focus:outline-none focus:border-blue-500" />
+
+      <input id="edit-duration" type="number"
+        class="input w-full p-2 rounded-xl border-2 border-gray-300 focus:outline-none focus:border-blue-500"
+        placeholder="Duration (min)" />
+
+      <textarea id="edit-description"
+        class="textarea w-full p-2 h-24 rounded-xl border-2 border-gray-300 focus:outline-none focus:border-blue-500 resize-none"
+        placeholder="Description"></textarea>
+
+      <div class="flex gap-2 mt-2">
+        <button type="button" id="edit-submit-button"
+          class="flex-1 bg-white text-orange-600 font-bold py-2 rounded-xl hover:bg-gray-100 transition-transform hover:scale-105 border-2 border-transparent">
+          Save
+        </button>
+
+        <button type="button" id="edit-cancel-button"
+          onclick="document.getElementById('edit-overlay').classList.add('invisible')"
+          class="flex-1 bg-red-500 text-white font-bold py-2 rounded-xl hover:bg-red-600 transition-transform hover:scale-105 border-2 border-transparent">
+          Cancel
+        </button>
       </div>
 
     </div>
-
-
   </div>
-
   <script src="fetchOnReload.js" defer></script>
   <script src="deleteButton.js" defer></script>
   <script src="editButton.js" defer></script>

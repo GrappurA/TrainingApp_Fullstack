@@ -5,6 +5,7 @@ if (!token)
     location.replace("./login.html");
 
 container.addEventListener("click", async (e) => {
+
     if (e.target.classList.contains("delete-button")) {
         try {
             const itemToRemove = e.target.closest(".latest-trainings-item");
@@ -28,7 +29,7 @@ container.addEventListener("click", async (e) => {
         }
         catch (err) {
             console.error(err);
-            alert(`Error adding training: ${err}`);
+            alert(`Error deleting training: ${err}`);
         }
 
     }

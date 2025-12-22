@@ -76,7 +76,6 @@ input[type=number] {
   justify-content: center; /* Horizontal centering */
 
   /* Ensures it's on top of all other content */
-  z-index: 1000;
 }
 
 /* 2. Your Edit Menu */

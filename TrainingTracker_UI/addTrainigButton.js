@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const addButton = document.getElementById("addTrainingBtn");
+
     const form = document.getElementById("training-form");
     if (!form) return;
 
@@ -10,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
+        addButton.disabled = true;
 
         const training = {
             name: document.getElementById("name").value,
@@ -34,6 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const saved = await response.json();
             addTrainingToUI(saved);
             form.reset();
+            addButton.disabled = false;
+
 
         } catch (err) {
             console.error(err);
