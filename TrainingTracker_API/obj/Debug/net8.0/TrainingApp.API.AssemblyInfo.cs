@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TrainingApp.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e4a48b01d4c10aa3e499593bb23c4189630809fd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f60aba6fd5875e46e5a4312a2cd2e6e3af815200")]
 [assembly: System.Reflection.AssemblyProductAttribute("TrainingApp.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TrainingApp.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

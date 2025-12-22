@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using TrainingTracker.Models;
 using TrainingApp.API.Models;
 using System.Security.Claims;
+using TrainingApp.API.DTOs;
 
 namespace TrainingTracker.Controllers
 {
@@ -78,11 +79,11 @@ namespace TrainingTracker.Controllers
 		}
 
 		[HttpPatch("patchtraining/{id}")]
-		public async Task<IActionResult> PutTraining(int trainingId, [FromBody] Training newTraining)
+		public async Task<IActionResult> PutTraining([FromBody] TrainingDto newTraining)
 		{
 			try
 			{
-				var rowsAffectedUpdate = await _context.Trainings.Where(tr => tr.TrainingId == trainingId).ExecuteUpdateAsync(upd => upd
+				var rowsAffectedUpdate = await _context.Trainings.Where(tr => tr.Id == newTraining.Id).ExecuteUpdateAsync(upd => upd
 				.SetProperty(t => t.Name, newTraining.Name)
 				.SetProperty(t => t.DateTime, newTraining.DateTime)
 				.SetProperty(t => t.Calories, newTraining.Calories)

@@ -44,13 +44,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "trainingId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
         "Name": "newTraining",
-        "Type": "TrainingTracker.Models.Training",
+        "Type": "TrainingApp.API.DTOs.TrainingDto",
         "IsRequired": true
       },
       {
